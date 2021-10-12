@@ -1,9 +1,12 @@
 import * as React from "react";
 import { reduxForm, InjectedFormProps } from "redux-form";
 import { useSelector } from "react-redux";
-import BasicInfoFields from "../components/BasicInfoFields";
+
 import { RootState } from "../store";
+
+import BasicInfoFields from "../components/BasicInfoFields";
 import EducationFields from "../components/EducationFields";
+import JobExperienceFields from "../components/JobExperienceFields";
 
 function Create(props: InjectedFormProps) {
   const formState = useSelector((state: RootState) => state.form.create);
@@ -17,6 +20,8 @@ function Create(props: InjectedFormProps) {
       <BasicInfoFields />
       <hr />
       <EducationFields />
+      <hr />
+      <JobExperienceFields />
     </form>
   );
 }
