@@ -5,7 +5,7 @@ export default function BasicInfoFields() {
   return (
     <>
       <h3>Info</h3>
-      <div className="form-row">
+      <div className="row">
         <div className="col">
           <label htmlFor="fullName">Full name</label>
           <Field
@@ -27,7 +27,7 @@ export default function BasicInfoFields() {
         </div>
       </div>
 
-      <div className="form-row">
+      <div className="row">
         <div className="col-6">
           <label htmlFor="phone">Phone</label>
           <Field
