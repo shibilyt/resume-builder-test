@@ -11,10 +11,10 @@ import SkillsFields from "../components/SkillFields";
 
 function Create(props: InjectedFormProps) {
   const formState = useSelector((state: RootState) => state.form.create);
-  console.log(formState?.values);
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(e);
+    // persist the data
+    localStorage.setItem("resumeData", JSON.stringify(formState.values));
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -25,6 +25,10 @@ function Create(props: InjectedFormProps) {
       <JobExperienceFields />
       <hr />
       <SkillsFields />
+      <hr />
+      <button className="btn btn-primary" type="submit">
+        Create Resume
+      </button>
     </form>
   );
 }
