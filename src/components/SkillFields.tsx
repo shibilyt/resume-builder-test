@@ -28,7 +28,7 @@ export default function SkillsFields() {
 }
 
 function renderAutoCompleteTagInput({
-  input: { onChange },
+  input: { onChange, value },
 }: WrappedFieldProps) {
   return (
     <AutoCompleteTagInput
@@ -36,6 +36,7 @@ function renderAutoCompleteTagInput({
       label="Select your skills"
       placeholder="select"
       onChange={(items) => onChange(items)}
+      value={value}
     />
   );
 }

@@ -2,20 +2,21 @@ import * as React from "react";
 import { reduxForm, InjectedFormProps } from "redux-form";
 import { useSelector } from "react-redux";
 
-import { createResumeInitialState, ResumeFormType, RootState } from "../store";
+import { RootState } from "../store";
 
 import BasicInfoFields from "../components/BasicInfoFields";
 import EducationFields from "../components/EducationFields";
 import JobExperienceFields from "../components/JobExperienceFields";
 import SkillsFields from "../components/SkillFields";
 
-function Create(props: InjectedFormProps<ResumeFormType, {}, string>) {
-  const formState = useSelector((state: RootState) => state.form.create);
+function Edit(props: InjectedFormProps) {
+  const formState = useSelector((state: RootState) => state.form.edit);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     // persist the data
     localStorage.setItem("resumeData", JSON.stringify(formState.values));
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <BasicInfoFields />
@@ -31,13 +32,13 @@ function Create(props: InjectedFormProps<ResumeFormType, {}, string>) {
       <hr />
 
       <button className="btn btn-primary" type="submit">
-        Create Resume
+        Update Resume
       </button>
     </form>
   );
 }
 
 export default reduxForm({
-  form: "create",
-  initialValues: createResumeInitialState,
-})(Create);
+  form: "edit",
+  initialValues: JSON.parse(localStorage.getItem("resumeData") || "{}"),
+})(Edit);

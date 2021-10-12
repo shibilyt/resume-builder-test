@@ -6,7 +6,7 @@ interface AutoCompleteTagInputProps {
   items: string[];
   label: string;
   placeholder?: string;
-  value?: string | string[];
+  value?: string[];
   onChange?: (items: string[]) => void;
 }
 
@@ -14,10 +14,12 @@ export default function AutoCompleteTagInput({
   items,
   label,
   placeholder,
-  value,
+  value = [],
   onChange,
 }: AutoCompleteTagInputProps) {
   const [inputValue, setInput] = React.useState("");
+
+  const itemsRef = React.useRef(items);
 
   const {
     getSelectedItemProps,
@@ -25,16 +27,16 @@ export default function AutoCompleteTagInput({
     addSelectedItem,
     removeSelectedItem,
     selectedItems,
-  } = useMultipleSelection<string>();
+  } = useMultipleSelection<string>({ initialSelectedItems: value });
 
   const filteredItems = React.useMemo(
     () =>
-      items.filter(
+      itemsRef.current.filter(
         (item) =>
           selectedItems.indexOf(item) < 0 &&
           item.toLowerCase().startsWith(inputValue.toLowerCase())
       ),
-    [items, selectedItems, inputValue]
+    [itemsRef, selectedItems, inputValue]
   );
 
   const {
@@ -72,10 +74,13 @@ export default function AutoCompleteTagInput({
         case useCombobox.stateChangeTypes.InputBlur:
           if (selectedItem) {
             setInput("");
+            itemsRef.current = [...items, selectedItem];
             addSelectedItem(selectedItem);
           }
           if (filteredItems.length === 0 && typeof input === "string") {
-            addSelectedItem(input);
+            itemsRef.current = [...items, inputValue];
+            addSelectedItem(inputValue);
+            setInput("");
           }
           break;
         default:
