@@ -7,6 +7,7 @@ import { RootState } from "../store";
 import BasicInfoFields from "../components/BasicInfoFields";
 import EducationFields from "../components/EducationFields";
 import JobExperienceFields from "../components/JobExperienceFields";
+import SkillsFields from "../components/SkillFields";
 
 function Create(props: InjectedFormProps) {
   const formState = useSelector((state: RootState) => state.form.create);
@@ -22,6 +23,8 @@ function Create(props: InjectedFormProps) {
       <EducationFields />
       <hr />
       <JobExperienceFields />
+      <hr />
+      <SkillsFields />
     </form>
   );
 }
