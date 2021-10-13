@@ -1,6 +1,7 @@
 import * as React from "react";
 import { reduxForm, InjectedFormProps } from "redux-form";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 import { createResumeInitialState, ResumeFormType, RootState } from "../store";
 
@@ -8,7 +9,6 @@ import BasicInfoFields from "../components/BasicInfoFields";
 import EducationFields from "../components/EducationFields";
 import JobExperienceFields from "../components/JobExperienceFields";
 import SkillsFields from "../components/SkillFields";
-import toast from "react-hot-toast";
 
 function Create({
   handleSubmit,

@@ -28,7 +28,7 @@ function JobItemFields({
         <>
           <div className="row mb-2">
             <div className="col">
-              <label htmlFor="institute">Company</label>
+              <label htmlFor="institution">Company</label>
               <Field
                 className="form-control"
                 name={`${field}.company`}

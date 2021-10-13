@@ -16,7 +16,7 @@ function EducationItemFields({
   fields,
   meta: { error, submitFailed },
 }: WrappedFieldArrayProps<{
-  institute: string;
+  institution: string;
   yearOfGraduation: number;
   degree: string;
 }>) {
@@ -26,10 +26,10 @@ function EducationItemFields({
         <>
           <div className="row mb-2">
             <div className="col">
-              <label htmlFor="institute">Institute</label>
+              <label htmlFor="institution">Institute</label>
               <Field
                 className="form-control"
-                name={`${field}.institute`}
+                name={`${field}.institution`}
                 component={renderField}
                 validate={[validation.required]}
                 placeholder="University of Joe"
@@ -70,7 +70,7 @@ function EducationItemFields({
         className="btn btn-outline-primary"
         onClick={() =>
           fields.push({
-            institute: "",
+            institution: "",
             yearOfGraduation: 2020,
             degree: "",
           })
