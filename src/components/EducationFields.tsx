@@ -22,7 +22,7 @@ function EducationItemFields({
 }>) {
   return (
     <>
-      {fields.map((field) => (
+      {fields.map((field, index) => (
         <>
           <div className="row mb-2">
             <div className="col">
@@ -36,7 +36,7 @@ function EducationItemFields({
               />
             </div>
             <div className="col row">
-              <div className="col-3">
+              <div className="col-2">
                 <label htmlFor="yearOfGraduation">Year</label>
                 <Field
                   component={renderField}
@@ -51,7 +51,7 @@ function EducationItemFields({
                   placeholder="2019"
                 />
               </div>
-              <div className="col">
+              <div className="col-9">
                 <label htmlFor="degree">Degree</label>
                 <Field
                   component={renderField}
@@ -60,6 +60,17 @@ function EducationItemFields({
                   validate={[validation.required]}
                   placeholder="B.Tech (CSE)"
                 />
+              </div>
+              <div className="col-1 d-flex align-items-end">
+                {fields.length > 1 && (
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger"
+                    onClick={() => fields.remove(index)}
+                  >
+                    X
+                  </button>
+                )}
               </div>
             </div>
           </div>

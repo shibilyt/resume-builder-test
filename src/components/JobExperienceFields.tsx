@@ -24,7 +24,7 @@ function JobItemFields({
 }>) {
   return (
     <>
-      {fields.map((field) => (
+      {fields.map((field, index) => (
         <>
           <div className="row mb-2">
             <div className="col">
@@ -68,15 +68,26 @@ function JobItemFields({
                   placeholder="2021"
                 />
               </div>
-              <div className="col">
+              <div className="col-5">
                 <label htmlFor="degree">Designation</label>
                 <Field
                   component={renderField}
                   className="form-control"
                   name={`${field}.designation`}
                   validate={[validation.required]}
-                  placeholder="Senior Software Engineer"
+                  placeholder="SSE"
                 />
+              </div>
+              <div className="col-1 d-flex align-items-end">
+                {fields.length > 1 && (
+                  <button
+                    type="button"
+                    className="btn btn-outline-danger"
+                    onClick={() => fields.remove(index)}
+                  >
+                    X
+                  </button>
+                )}
               </div>
             </div>
           </div>
