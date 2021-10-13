@@ -8,6 +8,7 @@ interface AutoCompleteTagInputProps {
   placeholder?: string;
   value?: string[];
   onChange?: (items: string[]) => void;
+  error?: string;
 }
 
 export default function AutoCompleteTagInput({
@@ -16,6 +17,7 @@ export default function AutoCompleteTagInput({
   placeholder,
   value = [],
   onChange,
+  error,
 }: AutoCompleteTagInputProps) {
   const [inputValue, setInput] = React.useState("");
 
@@ -92,6 +94,9 @@ export default function AutoCompleteTagInput({
   React.useEffect(() => {
     onChange?.(selectedItems);
   }, [selectedItems, onChange]);
+  React.useEffect(() => {
+    console.log("selected change");
+  }, [selectedItems]);
 
   return (
     <>
@@ -99,7 +104,7 @@ export default function AutoCompleteTagInput({
         <label {...getLabelProps()}>{label}</label>
         <div className="form-row" {...getComboboxProps()}>
           <input
-            className="col-6 form-control"
+            className={clsx("col-6 form-control", error && "is-invalid")}
             {...getInputProps(
               getDropdownProps({
                 preventKeyAction: isOpen,
@@ -107,6 +112,7 @@ export default function AutoCompleteTagInput({
               })
             )}
           />
+          {error && <div className="invalid-feedback">{error}</div>}
         </div>
         {/* list items */}
         <div className="form-row">

@@ -8,16 +8,23 @@ import BasicInfoFields from "../components/BasicInfoFields";
 import EducationFields from "../components/EducationFields";
 import JobExperienceFields from "../components/JobExperienceFields";
 import SkillsFields from "../components/SkillFields";
+import toast from "react-hot-toast";
 
-function Create(props: InjectedFormProps<ResumeFormType, {}, string>) {
+function Create({
+  handleSubmit,
+  error,
+  submitting,
+}: InjectedFormProps<ResumeFormType, {}, string>) {
   const formState = useSelector((state: RootState) => state.form.create);
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const onSubmit = (values: ResumeFormType) => {
     // persist the data
     localStorage.setItem("resumeData", JSON.stringify(formState.values));
+    toast.success("Successfully created Resume. You can edit now", {
+      duration: 3000,
+    });
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <BasicInfoFields />
       <hr />
 
@@ -30,7 +37,8 @@ function Create(props: InjectedFormProps<ResumeFormType, {}, string>) {
       <SkillsFields />
       <hr />
 
-      <button className="btn btn-primary" type="submit">
+      {error && <div>{error}</div>}
+      <button className="btn btn-primary" type="submit" disabled={submitting}>
         Create Resume
       </button>
     </form>

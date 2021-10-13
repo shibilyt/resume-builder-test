@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Field, WrappedFieldArrayProps } from "redux-form";
 import { FieldArrayCustom as FieldArray, renderField } from "./FieldArray";
+import * as validation from "../utils/validation";
 
 export default function JobExperienceFields() {
   return (
@@ -32,6 +33,7 @@ function JobItemFields({
                 className="form-control"
                 name={`${field}.company`}
                 component={renderField}
+                validate={[validation.required]}
                 placeholder="Acme inc"
               />
             </div>
@@ -42,6 +44,11 @@ function JobItemFields({
                   component={renderField}
                   type="number"
                   className="form-control"
+                  validate={[
+                    validation.required,
+                    validation.minValue(1970),
+                    validation.maxValue(2021),
+                  ]}
                   name={`${field}.startYear`}
                   placeholder="2019"
                 />
@@ -53,6 +60,11 @@ function JobItemFields({
                   type="number"
                   className="form-control"
                   name={`${field}.endYear`}
+                  validate={[
+                    validation.required,
+                    validation.minValue(1970),
+                    validation.maxValue(2021),
+                  ]}
                   placeholder="2021"
                 />
               </div>
@@ -62,6 +74,7 @@ function JobItemFields({
                   component={renderField}
                   className="form-control"
                   name={`${field}.designation`}
+                  validate={[validation.required]}
                   placeholder="Senior Software Engineer"
                 />
               </div>

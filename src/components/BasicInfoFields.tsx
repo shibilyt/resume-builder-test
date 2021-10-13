@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Field } from "redux-form";
-
+import * as validation from "../utils/validation";
+import { renderField } from "./FieldArray";
 export default function BasicInfoFields() {
   return (
     <>
@@ -11,8 +12,9 @@ export default function BasicInfoFields() {
           <Field
             className="form-control"
             name="fullName"
-            component="input"
+            component={renderField}
             placeholder="Full Name"
+            validate={validation.required}
           />
         </div>
         <div className="col">
@@ -20,8 +22,9 @@ export default function BasicInfoFields() {
           <Field
             className="form-control"
             name="email"
-            component="input"
+            component={renderField}
             type="email"
+            validate={[validation.required, validation.email]}
             placeholder="you@company.com"
           />
         </div>
@@ -33,9 +36,10 @@ export default function BasicInfoFields() {
           <Field
             className="form-control"
             name="phone"
-            component="input"
+            component={renderField}
             type="tel"
-            placeholder="+91-9999999999"
+            validate={[validation.required, validation.phoneNumber]}
+            placeholder="9999999999"
           />
         </div>
       </div>

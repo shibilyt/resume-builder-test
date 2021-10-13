@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import * as React from "react";
 import {
   FieldArray,
@@ -20,15 +21,16 @@ export const renderField = (
   const { touched, error } = props.meta;
   const { input, type, placeholder } = props;
 
+  const hasError = touched && error;
   return (
     <>
       <input
         {...input}
-        className="form-control"
+        className={clsx("form-control", hasError && "is-invalid")}
         type={type}
         placeholder={placeholder}
       />
-      {touched && error && <span>{error}</span>}
+      {hasError && <div className="invalid-feedback">{error}</div>}
     </>
   );
 };

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Field, WrappedFieldArrayProps } from "redux-form";
 import { FieldArrayCustom as FieldArray, renderField } from "./FieldArray";
+import * as validation from "../utils/validation";
 
 export default function EducationFields() {
   return (
@@ -30,6 +31,7 @@ function EducationItemFields({
                 className="form-control"
                 name={`${field}.institute`}
                 component={renderField}
+                validate={[validation.required]}
                 placeholder="University of Joe"
               />
             </div>
@@ -41,6 +43,11 @@ function EducationItemFields({
                   type="number"
                   className="form-control"
                   name={`${field}.yearOfGraduation`}
+                  validate={[
+                    validation.required,
+                    validation.minValue(1970),
+                    validation.maxValue(2021),
+                  ]}
                   placeholder="2019"
                 />
               </div>
@@ -50,6 +57,7 @@ function EducationItemFields({
                   component={renderField}
                   className="form-control"
                   name={`${field}.degree`}
+                  validate={[validation.required]}
                   placeholder="B.Tech (CSE)"
                 />
               </div>
