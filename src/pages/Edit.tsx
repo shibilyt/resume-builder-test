@@ -8,6 +8,7 @@ import BasicInfoFields from "../components/BasicInfoFields";
 import EducationFields from "../components/EducationFields";
 import JobExperienceFields from "../components/JobExperienceFields";
 import SkillsFields from "../components/SkillFields";
+import { Link } from "react-router-dom";
 
 function Edit({
   handleSubmit,
@@ -19,6 +20,21 @@ function Edit({
       duration: 3000,
     });
   };
+
+  let resumeData = localStorage.getItem("resumeData");
+
+  if (!resumeData) {
+    return (
+      <>
+        <div className="d-flex align-items-center">
+          No data added. Please add your data.
+          <Link className="btn btn-primary ml-4" to="/create">
+            Create your resume
+          </Link>
+        </div>
+      </>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -45,6 +61,7 @@ let resumeData = localStorage.getItem("resumeData");
 const resumeInitialData: ResumeFormType = resumeData
   ? JSON.parse(resumeData)
   : createResumeInitialState;
+
 export default reduxForm({
   form: "edit",
   initialValues: resumeInitialData,
